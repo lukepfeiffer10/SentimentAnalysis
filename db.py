@@ -19,6 +19,7 @@ def exec_proc(proc, *args):
         rs = curs.fetchall()
         rc = curs.rowcount
     except MySQLdb.DatabaseError as er:
+        print er
         return False, er
     finally:
         curs.close()
