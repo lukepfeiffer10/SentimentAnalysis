@@ -1,6 +1,9 @@
 import MySQLdb
 import hashlib
 import simplejson as json
+from settings import Database as d
+
+# database
 
 
 # Debugging function to pretty print json
@@ -12,16 +15,23 @@ def pretty_print(json_string):
 
 # Generic function to execute a stored procedure
 def exec_proc(proc, *args):
-    db = MySQLdb.connect("174.74.50.196", "remote", "mountaindew", "sentiment_analysis")
+    db = MySQLdb.connect(d.host, d.user, d.password, d.db_name)
     curs = db.cursor(MySQLdb.cursors.DictCursor)
     try:
         curs.callproc(proc, args)
         rs = curs.fetchall()
         rc = curs.rowcount
     except MySQLdb.DatabaseError as er:
-        print er
-        return False, er
+        print er # change to email
+        return False, Null, Null
     finally:
         curs.close()
         db.close()
-    return rc, rs
+    return True, rc, rs
+
+# Generic function to execute a query
+def exec_query(query):
+    db = MySQLdb.connect(d.host, d.user, d.password, d.db_name)
+    curs = db.cursor(MySQLdb.cursors.DictCursor)
+    db.query(query)
+    return db.store_result()
