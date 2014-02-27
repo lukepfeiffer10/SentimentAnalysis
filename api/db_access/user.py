@@ -1,0 +1,38 @@
+import hashlib
+from db import exec_proc
+import story
+
+# user
+
+def assign_story(user_id):
+    rc, rs = exec_proc("usp_story_assign", user_id)
+    return rc, rs
+    #return rs[0]['assigned_story'] if rc else False
+
+def select(user_id):
+    rc, rs = exec_proc("usp_sel_user", user_id)
+    return rs[0] if rc else False
+
+def select_all():
+    rc, rs = exec_proc("usp_sel_user_all")
+    return {'users': rs} if rc else False
+
+# Return user_id, assigned story_id, and last_sentence_id on success
+def insert(user_name, password, f_name, l_name, auto_assign_story = False):
+    hash = hashlib.sha1(password).hexdigest()
+    rc, rs = exec_proc("usp_ins_user", user_name, hash, f_name, l_name, auto_assign_story)
+    return (rs[0]['user_id'], rs[0]['story_id'], rs[0]['sentence_id']) if rc else (False, False, False)
+    
+# Return user_id, assigned_story_id on success, False otherwise
+def authenticate(usr_name, password):
+    hash = hashlib.sha1(password).hexdigest()
+    rc, rs = exec_proc("usp_sel_user_auth", usr_name, hash)
+    return (rs[0]['user_id'], rs[0]['story_id'], rs[0]['last_sentence_id']) if rc else (False, False, False)
+
+def delete(user_id):
+    rc, rs = exec_proc("usp_del_user", user_id)
+    return True if rc else False
+
+def username_exists(user_name):
+    rc, rs = exec_proc("usp_sel_user_by_name", user_name)
+    return True if rc else False

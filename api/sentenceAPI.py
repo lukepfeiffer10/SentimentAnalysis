@@ -1,11 +1,11 @@
 #!flask/bin/python
 
-from flask import Flask, jsonify, abort, request, make_response, url_for
+from flask import Flask, jsonify, abort, request, make_response, url_for, session
 from flask.views import MethodView
 from flask.ext.restful import Api, Resource, reqparse, fields, marshal
-import user 
-import story
-import sentence
+from db_access import sentence, user
+
+
 
 class SentencesAPI(Resource):
 
@@ -13,5 +13,5 @@ class SentencesAPI(Resource):
         super(SentencesAPI, self).__init__()
         
     def get(self):
-        x,y = sentence.select_next(84,100,100)
-        return y
+        sentences = sentence.select_next(session['u_id'],100,100)
+        return sentences

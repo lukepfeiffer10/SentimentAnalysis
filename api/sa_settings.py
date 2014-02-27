@@ -1,12 +1,12 @@
 # Website settings
 
-class Database:
+class DatabaseConnection:
     host = "174.74.50.196"
     user = "remote"
     password = "mountaindew"
     db_name = "sentiment_analysis"
 
-class Email:
+class EmailConnection:
     server = ""
     port = ""
     sender = ""
