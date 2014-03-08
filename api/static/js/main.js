@@ -1,4 +1,5 @@
 ﻿/// <reference path="js/backbone.js" />
+/// <reference path="js/jquery.js" />
 /// <reference path="js/underscore.js" />
 
 $(function () {
@@ -25,7 +26,7 @@ $(function () {
         template: _.template("<%= sentence_txt %>"),
 
         initialize: function () {
-
+		
         },
 
         render: function () {
@@ -34,21 +35,58 @@ $(function () {
         },
 
         editSentiment: function () {
-            alert('You clicked me!');
+            alert(this.model.get("id"));
         }
     });
 
-    /*var Sentences = new SentenceList([new Sentence({id: 1, text: "this is a test!", order: 1}),
-                                new Sentence({id: 2, text: "this is a test 2.", order: 2}),
-                                new Sentence({ id: 3, text: "this is a test 3?", order: 3 })]);*/
+    var Tag = Backbone.Model.extend({
+
+    });
+
+    var TagView = Backbone.View.extend({
+        el: $('#taggingBox'),
+
+        initialize: function () {
+
+        },
+
+        render: function () {
+            this.$el.html(this.template(this.model.attributes));
+            return this;
+        },
+    });
 								
-	var Sentences  = new SentenceList();
-	Sentences.fetch({
-		parse: true,
-		success: function(collection, response, options) {
-			collection.each(function(sentence) {
-				$('#story').append(new SentenceView({model: sentence}).render().$el);
-			});
-		}
-	});
+    var Sentences = new SentenceList();
+
+    var AppView = Backbone.View.extend({
+        el: $('body'),
+
+        events: {
+            "click #logout": "logout"
+        },
+
+        logout: function() {
+            $.ajax({
+                type: 'DELETE',
+                url: 'api/user/login',
+                success: function () {
+                    window.location = '/login'
+                }
+            });
+        },
+        
+        initialize: function () {
+            Sentences.fetch({
+                parse: true,
+                success: function (collection, response, options) {
+                    collection.each(function (sentence) {
+                        $('#story').append(new SentenceView({ model: sentence }).render().$el);
+                    });
+                }
+            });
+        }
+    });
+
+    var App = new AppView();
+	
 });
