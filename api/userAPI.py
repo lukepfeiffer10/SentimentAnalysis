@@ -35,3 +35,8 @@ class UserLoginAPI(Resource):
             return True
         else:
             return False
+            
+    def delete(self):
+        session.pop('u_id', None)
+        session.pop('story_id', None)
+        session.pop('last_sentence_id', None)
