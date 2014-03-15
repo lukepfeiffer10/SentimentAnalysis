@@ -5,7 +5,9 @@ from flask.views import MethodView
 from flask.ext.restful import Api, Resource, reqparse, fields, marshal
 from db_access import sentence, user
 
-
+parser = reqparse.RequestParser()
+parser.add_argument('sentence_id', type=int)
+parser.add_argument('tag_id', type=int)
 
 class SentencesAPI(Resource):
 
@@ -16,7 +18,7 @@ class SentencesAPI(Resource):
         sentences = sentence.select_next(session['u_id'],100,100)
         return sentences
         
-    def post(self):
+    def put(self):
         args = parser.parse_args()
         sentence_id = args['sentence_id']
         tag_id = args['tag_id']

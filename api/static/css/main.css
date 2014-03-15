@@ -1,3 +1,12 @@
 ﻿span.sentence {
     margin-right: 5px;
 }
+
+div#story {
+    width: 8.5in;
+    float:left;
+}
+
+div#taggingBox {
+    float:left;
+}
