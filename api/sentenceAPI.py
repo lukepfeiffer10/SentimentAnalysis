@@ -15,3 +15,9 @@ class SentencesAPI(Resource):
     def get(self):
         sentences = sentence.select_next(session['u_id'],100,100)
         return sentences
+        
+    def post(self):
+        args = parser.parse_args()
+        sentence_id = args['sentence_id']
+        tag_id = args['tag_id']
+        return sentence.tag(session['u_id'], sentence_id, tag_id)     
