@@ -14,7 +14,7 @@ def select_next(user_id, num_before = 0, num_after = 0):
 # Call this only if isLegit() returns true
 def tag(user_id, sentence_id, tag_id):
     rc, rs = exec_proc("usp_tag_sentence", user_id, sentence_id, tag_id)
-    return True if rc else False
+    return rs if rc else False
 
 # Validate a sentence to be tagged.
 def validate(user_id, sentence_id, tag_id):
