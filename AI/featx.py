@@ -8,6 +8,10 @@ from nltk.corpus import stopwords
 from nltk.collocations import BigramCollocationFinder
 from nltk.metrics import BigramAssocMeasures
 
+# Test Stories
+testStories = [ ("There was once an ugly barnacle. He was so ugly, that everyone died. The end.", "neg"),
+("\tOnce upon a time, a princess was trapped in a castle in a far away land. This castle was guarded day and night by a dragon that kills anyone that dares set foot on the castle grounds. A knight in shining armor came to challenge the dragon and to save the princess.\n\tBased on sheer courage alone, the dragon was slain by the knight. The princess was overjoyed to be saved by the knight, instantly falling in love with him. The knight reveals that he is a prince, allowing them to marry and live happily ever after.", "pos") ]
+
 def bag_of_words(words):
     return dict([(word, True) for word in words])
 
