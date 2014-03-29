@@ -14,29 +14,16 @@ class UserLoginAPI(Resource):
     def __init__(self):
         super(UserLoginAPI, self).__init__()
         
-    # Test to simulate what the post function would do
-    # if successful 
-    def get(self):
-        session['u_id'] = 90
-        session['story_id'] = 13
-        session['last_sentence_id'] = 50
-        session.permanent = False
-        return True
-        
     def post(self):
         args = parser.parse_args()
         username = args['username']
         password = args['password']
-        u_id, story_id, last_sentence_id = user.authenticate(username, password)
+        u_id  = user.authenticate(username, password)
         if (u_id):
             session['u_id'] = u_id
-            session['story_id'] = story_id
-            session['last_sentence_id'] = last_sentence_id
             return True
         else:
             return False, 401
-            
+
     def delete(self):
         session.pop('u_id', None)
-        session.pop('story_id', None)
-        session.pop('last_sentence_id', None)

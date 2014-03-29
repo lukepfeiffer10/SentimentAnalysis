@@ -8,8 +8,8 @@ import csv
 import shutil
 import re
 
-import story as story_db
-import sentence as sentence_db
+from db_access import story as story_db
+from db_access import sentence as sentence_db
 
 #84 = Userid, 13 = Userid
 #13 = origi story
@@ -33,7 +33,7 @@ def main_testing():
     #insert_story()
 def import_story_test():
     print "import_story"
-    story = story_db.select_content(21)
+    story = story_db.select_content(13)
     print story
     print story_db.select_all()
     
@@ -44,7 +44,7 @@ def tokenize_story_test(imported_story):
     tokenized_story = sent_tokenize(imported_story)
     for x in xrange(len(tokenized_story)):
         print tokenized_story[x]
-        sentence_db.insert(21, tokenized_story[x], x)
+        sentence_db.insert(13, tokenized_story[x], x)
 def insert_story():
     print "insert_story"
     #story_db.insert(84, "I am a title", "I am a story. I do not include any special characters of any sort. That would be silly, and also not for me.")

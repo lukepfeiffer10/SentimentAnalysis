@@ -9,6 +9,7 @@ app = Flask(__name__, static_url_path = "/static", template_folder = "../")
 api = Api(app)
 
 api.add_resource(SentencesAPI, '/api/sentences', endpoint= 'sentences')
+api.add_resource(UserLoginAPI, '/api/user/', endpoint= 'login')
 api.add_resource(UserLoginAPI, '/api/user/login', endpoint= 'login')
 
 @app.route('/')

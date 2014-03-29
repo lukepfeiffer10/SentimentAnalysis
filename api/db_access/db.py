@@ -3,11 +3,8 @@ import hashlib
 import simplejson as json
 from sa_settings import DatabaseConnection as db_conn
 
-# database
-
-
 # Debugging function to pretty print json
-def pretty_print(json_string):
+def _pretty_print(json_string):
     s = json.dumps(json_string, indent=4 * ' ')
     print '\n'.join([l.rstrip() for l in  s.splitlines()])
 

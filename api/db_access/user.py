@@ -24,14 +24,13 @@ def select_page_info(user_id):
 def insert(user_name, password, f_name, l_name, auto_assign_story = False):
     hash = hashlib.sha1(password).hexdigest()
     rc, rs = exec_proc("usp_ins_user", user_name, hash, f_name, l_name, auto_assign_story)
-    print rc
-    return (rs[0]['user_id'], rs[0]['story_id'], rs[0]['sentence_id']) if rc else (False, False, False)
+    return rs[0]['user_id'] if rc else False
     
 # Return user_id, assigned_story_id on success, False otherwise
 def authenticate(usr_name, password):
     hash = hashlib.sha1(password).hexdigest()
     rc, rs = exec_proc("usp_sel_user_auth", usr_name, hash)
-    return (rs[0]['user_id'], rs[0]['story_id'], rs[0]['last_sentence_id']) if rc else (False, False, False)
+    return rs[0]['user_id'] if rc else False
 
 def delete(user_id):
     rc, rs = exec_proc("usp_del_user", user_id)
