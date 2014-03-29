@@ -5,8 +5,15 @@ $(function () {
         var loginObject = {};
         loginObject.username = $('#username').val();
         loginObject.password = $('#password').val();
-        $.post('/api/user/login', loginObject, function () {
-            window.location = '/';
+        $.ajax({
+            url: '/api/user', 
+            data: loginObject, 
+            success: function () {
+                window.location = '/';
+            },
+            dataType: 'json',
+            type: 'PUT',
+            contentType: 'application/json'
         });
     });
 });

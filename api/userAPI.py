@@ -9,12 +9,12 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', type=str)
 parser.add_argument('password', type=str)
 
-class UserLoginAPI(Resource):
+class UserAPI(Resource):
 
     def __init__(self):
-        super(UserLoginAPI, self).__init__()
+        super(UserAPI, self).__init__()
         
-    def post(self):
+    def put(self):
         args = parser.parse_args()
         username = args['username']
         password = args['password']

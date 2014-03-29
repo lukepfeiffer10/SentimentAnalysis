@@ -2,6 +2,19 @@
     margin-right: 5px;
 }
 
+    span.sentence.positive {
+        border-bottom:1px solid #5DFF51;
+    }
+
+    span.sentence.neutral {
+        border-bottom:1px solid #81B8CC;
+    }
+
+    span.sentence.negative {
+        border-bottom:1px solid #FF7A5E;
+    }
+
+
 div#story {
     width: 8.5in;
     float:left;
@@ -9,4 +22,16 @@ div#story {
 
 div#taggingBox {
     float:left;
+}
+
+#positive.selected {
+    background-color: #5DFF51;
+}
+
+#neutral.selected {
+    background-color: #81B8CC;
+}
+
+#negative.selected {
+    background-color: #FF7A5E;
 }

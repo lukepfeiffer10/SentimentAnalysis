@@ -2,14 +2,15 @@
 
 from flask import Flask, jsonify, abort, request, make_response, url_for, session, render_template
 from flask.ext.restful import Api, Resource, reqparse, fields, marshal
-from sentenceAPI import SentencesAPI
-from userAPI import UserLoginAPI
+from sentenceAPI import SentencesAPI, SentencesListAPI
+from userAPI import UserAPI
  
 app = Flask(__name__, static_url_path = "/static", template_folder = "../")
 api = Api(app)
 
-api.add_resource(SentencesAPI, '/api/sentences', endpoint= 'sentences')
-api.add_resource(UserLoginAPI, '/api/user/login', endpoint= 'login')
+api.add_resource(SentencesListAPI, '/api/sentences', endpoint= 'sentences')
+api.add_resource(SentencesAPI, '/api/sentences/<int:id>', endpoint= 'sentence')
+api.add_resource(UserAPI, '/api/user', endpoint= 'user')
 
 @app.route('/')
 def renderIndex():
