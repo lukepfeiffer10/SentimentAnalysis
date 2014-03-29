@@ -15,11 +15,11 @@ class SentencesAPI(Resource):
         super(SentencesAPI, self).__init__()
         
     def get(self):
-        sentences = sentence.select_next(session['u_id'],100,100)
+        sentences = sentence.select_current_group(session['u_id'])
         return sentences
-        
+
     def put(self):
         args = parser.parse_args()
         sentence_id = args['sentence_id']
         tag_id = args['tag_id']
-        return sentence.tag(session['u_id'], sentence_id, tag_id)     
+        return sentence.tag(session['u_id'], sentence_id, tag_id)
