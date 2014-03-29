@@ -14,7 +14,7 @@ api.add_resource(UserLoginAPI, '/api/user/login', endpoint= 'login')
 @app.route('/')
 def renderIndex():
     return render_template('index.html')
-    
+
 @app.route('/login')
 def renderLogin():
     return render_template('login.html')
