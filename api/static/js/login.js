@@ -11,9 +11,9 @@ $(function () {
             success: function () {
                 window.location = '/';
             },
-            dataType: 'json',
+            //dataType: 'json',
             type: 'PUT',
-            contentType: 'application/json'
+            //contentType: 'application/json'
         });
     });
 });
