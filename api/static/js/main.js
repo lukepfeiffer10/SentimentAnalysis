@@ -105,7 +105,7 @@ $(function () {
         logout: function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'api/user/login',
+                url: 'api/user',
                 success: function () {
                     window.location = '/login'
                 }
