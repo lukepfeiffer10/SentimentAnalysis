@@ -21,10 +21,10 @@ def select_page_info(user_id):
     return rs[0] if rc else rc
 
 # Return user_id, assigned story_id, and last_sentence_id on success
-def insert(user_name, password, f_name, l_name, auto_assign_story = False):
+def insert(user_name, password, f_name, l_name):
     hash = hashlib.sha1(password).hexdigest()
-    rc, rs = exec_proc("usp_ins_user", user_name, hash, f_name, l_name, auto_assign_story)
-    return rs[0]['user_id'] if rc else False
+    rc, rs = exec_proc("usp_ins_user", user_name, hash, f_name, l_name, True)
+    return True if rc else False
     
 # Return user_id, assigned_story_id on success, False otherwise
 def authenticate(usr_name, password):
