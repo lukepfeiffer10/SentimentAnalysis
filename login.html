@@ -19,22 +19,55 @@
     <div id="body">
         <section class="content-wrapper main-content clear-fix">
             <hgroup class="title">
-                <h1>Log in.</h1>
+                <h1>Log in</h1>
+                <h1 style="margin-left:50%;">New User Registration</h1>
             </hgroup>
             <section id="loginForm">
                 <fieldset>
                     <legend>Log in Form</legend>
-                    <ol>
-                        <li>
-                            <label for="username">Username</label>
-                            <input type="text" id="username" />
-                        </li>
-                        <li>
-                            <label for="password">Password</label>
-                            <input type="password" id="password" />
-                        </li>
-                    </ol>
-                    <input type="button" id="loginButton" value="Log in" />
+                    <form id="loginArea">
+                        <ol>
+                            <li>
+                                <label for="username">Username</label>
+                                <input type="text" id="username" required />
+                            </li>
+                            <li>
+                                <label for="password">Password</label>
+                                <input type="password" id="password" required />
+                            </li>
+                        </ol>
+                        <input type="submit" id="loginButton" value="Log in" />
+                    </form>
+                </fieldset>
+            </section>
+            <section id="socialLoginForm">
+                <fieldset>
+                    <legend>Not a User? Register Here</legend>
+                    <form id="newUserForm">
+                        <ol>
+                            <li>
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" required />
+                            </li>
+                            <li>
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" required />
+                            </li>
+                            <li>
+                                <label for="newUsername">Username</label>
+                                <input type="text" id="newUsername" required />
+                            </li>
+                            <li>
+                                <label for="newPassword">Password</label>
+                                <input type="password" id="newPassword" required />
+                            </li>
+                            <li>
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" required />
+                            </li>
+                        </ol>
+                        <input type="submit" id="createUser" value="Create User" />
+                    </form>
                 </fieldset>
             </section>
         </section>
