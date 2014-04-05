@@ -14,7 +14,10 @@ api.add_resource(UserAPI, '/api/user', endpoint= 'user')
 
 @app.route('/')
 def renderIndex():
-    return render_template('index.html')
+    if session.has_key('u_id'):
+        return render_template('index.html')
+    else:
+        return renderLogin()
 
 @app.route('/login')
 def renderLogin():
