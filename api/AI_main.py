@@ -2,6 +2,7 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.corpus import stopwords
 
 import os
 import csv
@@ -17,13 +18,36 @@ from db_access import sentence as sentence_db
 #14 = my story
 
 #ACTUAL FUNCTIONS USED IN THE WEBSITE
+story_db_id = 21
 def tokenize_story(story_db_id):
     print "tokenize_story"
-    tokenized_story = sent_tokenize(story_db_id)
+    story = story_db.select_content(story_db_id)
+    tokenized_story = sent_tokenize(story)
     for x in xrange(len(tokenized_story)):
-        print tokenized_story[x]
-        sentence_db.insert(story_db_id, tokenized_story[x], x)
+        #print tokenized_story[x]
+        sentence_id = sentence_db.insert(story_db_id, tokenized_story[x], x)
+        keyword_extraction(tokenized_story[x])
+        print sentence_id
 
+def keyword_extraction(sentence):
+    print "keyword_extraction"
+    words = word_tokenize(sentence)
+    english_stops = set(stopwords.words('english'))
+    print words
+    keywords = []
+    
+    from db_access import sa as stem_db
+    stem_lib = stem_db.select_liwc_stems()
+    print stem_lib
+    """
+    for word in words:
+        if word not in english_stops:
+            #stem_txt, tag_id
+            #keywords.insert(0, word)
+    print keywords"""
+    
+tokenize_story(story_db_id)
+    
 #TESTING
 def main_testing():
     print "MAIN"
@@ -33,7 +57,7 @@ def main_testing():
     #insert_story()
 def import_story_test():
     print "import_story"
-    story = story_db.select_content(13)
+    story = story_db.select_content(21)
     print story
     print story_db.select_all()
     
@@ -44,7 +68,7 @@ def tokenize_story_test(imported_story):
     tokenized_story = sent_tokenize(imported_story)
     for x in xrange(len(tokenized_story)):
         print tokenized_story[x]
-        sentence_db.insert(13, tokenized_story[x], x)
+        sentence_db.insert(21, tokenized_story[x], x)
 def insert_story():
     print "insert_story"
     #story_db.insert(84, "I am a title", "I am a story. I do not include any special characters of any sort. That would be silly, and also not for me.")
@@ -52,4 +76,4 @@ def insert_story():
     story_db.insert(84, "This is an actual story", story_new)
 
 
-main_testing()
+#main_testing()
