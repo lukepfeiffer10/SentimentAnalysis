@@ -12,9 +12,9 @@ $(function () {
             success: function () {
                 window.location = '/';
             },
-            //dataType: 'json',
+            dataType: 'json',
             type: 'PUT',
-            //contentType: 'application/json'
+            contentType: 'application/json'
         });
     });
 
@@ -25,6 +25,16 @@ $(function () {
         newUser.lastName = $('#lastName').val();
         newUser.username = $('#newUsername').val();
         newUser.password = $('#newPassword').val();
-        alert(JSON.stringify(newUser));
+        $.ajax({
+            url: '/api/user',
+            data: JSON.stringify(newUser),
+            success: function (data) {
+                //window.location = '/';
+                alert(data);
+            },
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json'
+        });
     });
 });

@@ -37,6 +37,19 @@ $(function () {
 
         render: function () {
             this.$el.html(this.template(this.model.attributes));
+            switch (this.model.get('tag_id')) {
+                case 1:
+                    this.$el.addClass('positive');
+                    break;
+                case 2:
+                    this.$el.addClass('negative');
+                    break;
+                case 3:
+                    this.$el.addClass('neutral');
+                    break;
+                default:
+                    break;
+            }
             return this;
         },
 

@@ -8,9 +8,8 @@ from db_access import sentence, user
 parser = reqparse.RequestParser()
 parser.add_argument('username', type=str)
 parser.add_argument('password', type=str)
-parser.add_argument('password_confirm', type=str)
-parser.add_argument('first_name', type=str)
-parser.add_argument('last_name', type=str)
+parser.add_argument('firstName', type=str)
+parser.add_argument('lastName', type=str)
 
 class UserAPI(Resource):
 
@@ -18,13 +17,13 @@ class UserAPI(Resource):
         super(UserAPI, self).__init__()
         
     def post(self):
+        args = parser.parse_args()
         username = args['username']
         password = args['password']
-        password_confirm = args['password_confirm']
-        first_name = args['first_name']
-        last_name = args['last_name']
+        first_name = args['firstName']
+        last_name = args['lastName']
         
-        return (password == password_confirm and user.insert(username, password, first_name, last_name))
+        return user.insert(username, password, first_name, last_name)
             
 
     def put(self):
