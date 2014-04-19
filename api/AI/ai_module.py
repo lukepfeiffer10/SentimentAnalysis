@@ -1,6 +1,7 @@
 import nltk
 import collections
 import pickle
+import sys
 
 # Needed for filtering out stopwords
 from nltk.corpus import stopwords
@@ -12,6 +13,9 @@ from nltk.metrics import BigramAssocMeasures
 from nltk import word_tokenize
 from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import CategorizedPlaintextCorpusReader
+
+sys.path.append('..\\')
+from tag_enum import *
 
 # Test Stories
 testStories = [ ("There was once an ugly barnacle. He was so ugly, that everyone died. The end.", "neg"),
@@ -95,3 +99,54 @@ def classify(sent, classifier=None):
     cat = classifier.classify(bag_of_words(word_tokenize(sent)))
     weight = classifier.prob_classify(bag_of_words(word_tokenize(sent))).prob(cat)
     return cat, weight
+    
+def update_sentences(sentences, classifier=None):
+    """Updates the sentences of the database with pos or neg tags. If the sentence is tagged, an update will be made to the corpus with the sentence. If untagged, the current classifier will tag it and update the corpus with the sentence.
+    
+    Parameters:
+        sentences   - list of dictionaries using the following format:
+                      [{"sentence_text": "I am happy.", "tag_id": 1}, ...]
+                      Tag number is represented by tag_enum.py
+        classifier  - classifier for automatic tagging.
+                      If none given, loads classifier stored in 'nb_classifier'
+    
+    Returns:
+        Updated sentences
+    """
+    if classifier == None:
+        try:
+            classifier=pickle.load(open('nb_classifier', 'rb'))
+        except IOError as e:
+            print("Error: nb_classifier file not found")
+            return
+        except:
+            print("Unexpected Error")
+            return
+    
+    corNeg = None
+    corPos = None
+    corNeu = None
+    try:
+        corNeg = open('corpus\\neg.txt', 'ab')
+        corPos = open('corpus\\pos.txt', 'ab')
+        corNeu = open('corpus\\neu.txt', 'ab')
+    except:
+        print("Error: Loading Corpus")
+    for sent_d in sentences:
+        sent = sent_d["sentence_text"]
+        tagged = sent_d["tag_id"]
+        if tagged == None or tagged == '':
+            # tag does not exist
+            cat, weight = classify(sent, classifier)
+            # tagged = cat
+        # update corpus
+        if tagged == tag.neg:
+            corNeg.write('\n'+sent)
+        if tagged == tag.pos:
+            corPos.write('\n'+sent)
+        if tagged == tag.neu:
+            corNeu.write('\n'+sent)
+    corNeg.close()
+    corPos.close()
+    corNeu.close()
+    return sentences
