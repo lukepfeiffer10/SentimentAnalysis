@@ -37,7 +37,7 @@ def tokenize_story(story_db_id):
         #insert sentence into sentence db
         sentence_id = sentence_db.insert(story_db_id, tokenized_story[x], x)
         #extract keywords from sentence
-        keyword_extraction(sentence_id, tokenized_story[x], stem_lib)
+        #keyword_extraction(sentence_id, tokenized_story[x], stem_lib)
         #print sentence_id
 
     #Determine Sentence Sentiment Using NLTK methodology functions
@@ -46,11 +46,9 @@ def tokenize_story(story_db_id):
 def keyword_extraction(sentence_id, sentence, stem_lib):
     from db_access import sa as stem_db
     
-    #print "keyword_extraction"
-    
+        
     words = word_tokenize(sentence)
     english_stops = set(stopwords.words('english'))
-    #print words
     
     keywords = []
     #Generate Keywords List
