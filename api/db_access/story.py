@@ -1,9 +1,8 @@
 from db import *
-# will need to import from NLTK
 
 def insert(user_id, story_title, story_content):
     rc, rs = exec_proc("usp_ins_story", user_id, story_title, story_content)
-    return rc
+    return rs[0]['story_id']
 
 # Call this once after inserting all sentences for a particular story
 def insert_complete(story_id):
@@ -25,6 +24,6 @@ def select_content(story_id):
 def delete(user_id, story_id):
     rc, rs = exec_proc("usp_del_story", user_id, story_id)
     return rc
-    
+
 def title_exits(user_id, story_title):
     return 0
