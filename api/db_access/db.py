@@ -1,9 +1,9 @@
 import MySQLdb
 import hashlib
 import simplejson as json
-from sa_settings import DatabaseConnection as db_conn
+from sa_settings import DatabaseConnection as db_settings
 
-# Debugging function to pretty print json
+# Debugging function to pretty print JSON
 def _pretty_print(json_string):
     s = json.dumps(json_string, indent=4 * ' ')
     print '\n'.join([l.rstrip() for l in  s.splitlines()])
@@ -11,7 +11,7 @@ def _pretty_print(json_string):
 
 # Generic function to execute a stored procedure
 def exec_proc(proc, *args):
-    db = MySQLdb.connect(db_conn.host, db_conn.user, db_conn.password, db_conn.db_name)
+    db = MySQLdb.connect(db_settings.host, db_settings.user, db_settings.password, db_settings.db_name)
     curs = db.cursor(MySQLdb.cursors.DictCursor)
     try:
         curs.callproc(proc, args)
@@ -24,6 +24,9 @@ def exec_proc(proc, *args):
         curs.close()
         db.close()
     return rc, rs
+    
+def get_conn_obj():
+    return MySQLdb.connect(db_settings.host, db_settings.user, db_settings.password, db_settings.db_name)
 
 # Generic function to execute a query
 def exec_query(query):
@@ -31,3 +34,4 @@ def exec_query(query):
     curs = db.cursor(MySQLdb.cursors.DictCursor)
     db.query(query)
     return db.store_result()
+
