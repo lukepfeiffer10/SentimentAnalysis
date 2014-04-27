@@ -12,7 +12,7 @@ def test():
     type = "type"
     
     # Create a new cluster
-    curs.execute(sa.sql_insert_cluster, (sentiment, length, weight, type))
+    curs.execute(sa.sql_insert_cluster, (sentiment, length, weight))
     # Get the cluster id of the cluster we just created
     last_cluster_id = curs.lastrowid
     print last_cluster_id
@@ -20,7 +20,7 @@ def test():
     # a test sentence id to insert into the cluster
     sentence_id = 965
     
-    curs.execute(sa.sql_update_sentence_cluster, (last_cluster_id, sentence_id))
+    curs.execute(sa.sql_update_sentence_cluster, (last_cluster_id, sentence_id, type))
     
     # At this point, you could change the value of sentence_id and then call the above statement again
     # and continue adding sentences in the cluster. Additionally you could change the variables for the cluster

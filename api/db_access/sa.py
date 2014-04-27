@@ -20,12 +20,10 @@ sql_insert_cluster = """
 INSERT INTO sa_cluster (
 sentiment, 
 length, 
-weight, 
-type) 
+weight)
 VALUES 
-(%s, %s, %s, %s); """
+(%s, %s, %s); """
 
 sql_update_sentence_cluster = """
-UPDATE sentence
-SET cluster_id = %s
-WHERE id = %s; """
+INSERT INTO sa_sentence_cluster (cluster_id, sentence_id, type)
+VALUES ( %s, %s, %s);  """
