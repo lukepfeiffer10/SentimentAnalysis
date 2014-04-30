@@ -11,7 +11,7 @@ def _pretty_print(json_string):
 
 # Generic function to execute a stored procedure
 def exec_proc(proc, *args):
-    db = MySQLdb.connect(db_settings.host, db_settings.user, db_settings.password, db_settings.db_name)
+    db = MySQLdb.connect(db_settings.host, db_settings.user, db_settings.password, db_settings.db_name, charset='utf8')
     curs = db.cursor(MySQLdb.cursors.DictCursor)
     try:
         curs.callproc(proc, args)

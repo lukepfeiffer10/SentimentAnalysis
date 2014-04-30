@@ -41,3 +41,9 @@ div#aboutText {
     margin-left:auto;
     margin-right:auto;
 }
+
+h1.about {
+    width:80px;
+    margin-left:auto;
+    margin-right:auto;
+}
