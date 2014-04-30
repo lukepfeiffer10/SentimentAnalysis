@@ -35,3 +35,9 @@ div#taggingBox {
 #negative.selected {
     background-color: #FF7A5E;
 }
+
+div#aboutText {
+    width:960px;
+    margin-left:auto;
+    margin-right:auto;
+}
