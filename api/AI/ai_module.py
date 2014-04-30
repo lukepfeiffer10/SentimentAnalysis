@@ -100,28 +100,14 @@ def classify(sent, classifier=None):
     weight = classifier.prob_classify(bag_of_words(word_tokenize(sent))).prob(cat)
     return cat, weight
     
-def update_sentences(sentences, classifier=None):
-    """Updates the sentences of the database with pos or neg tags. If the sentence is tagged, an update will be made to the corpus with the sentence. If untagged, the current classifier will tag it and update the corpus with the sentence.
+def update_corpus(sentences):
+    """Updates the corpus from a dictionary of sentences.
     
     Parameters:
         sentences   - list of dictionaries using the following format:
-                      [{"sentence_text": "I am happy.", "tag_id": 1}, ...]
+                      [{"sentence_txt": "I am happy.", "tag_id": 1}, ...]
                       Tag number is represented by tag_enum.py
-        classifier  - classifier for automatic tagging.
-                      If none given, loads classifier stored in 'nb_classifier'
-    
-    Returns:
-        Updated sentences
     """
-    if classifier == None:
-        try:
-            classifier=pickle.load(open('nb_classifier', 'rb'))
-        except IOError as e:
-            print("Error: nb_classifier file not found")
-            return
-        except:
-            print("Unexpected Error")
-            return
     
     corNeg = None
     corPos = None
@@ -132,13 +118,10 @@ def update_sentences(sentences, classifier=None):
         corNeu = open('corpus\\neu.txt', 'ab')
     except:
         print("Error: Loading Corpus")
+        return
     for sent_d in sentences:
-        sent = sent_d["sentence_text"]
+        sent = sent_d["sentence_txt"]
         tagged = sent_d["tag_id"]
-        if tagged == None or tagged == '':
-            # tag does not exist
-            cat, weight = classify(sent, classifier)
-            # tagged = cat
         # update corpus
         if tagged == tag.neg:
             corNeg.write('\n'+sent)
@@ -149,4 +132,3 @@ def update_sentences(sentences, classifier=None):
     corNeg.close()
     corPos.close()
     corNeu.close()
-    return sentences
