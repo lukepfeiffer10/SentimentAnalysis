@@ -14,7 +14,6 @@ from nltk import word_tokenize
 from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import CategorizedPlaintextCorpusReader
 
-sys.path.append('..\\')
 from tag_enum import *
 
 # Test Stories
