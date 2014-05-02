@@ -58,7 +58,7 @@ def split_label_feats(lfeats, split=0.75):
         test_feats.extend([(feat, label) for feat in feats[cutoff:]])
     return train_feats, test_feats
     
-def train_classifier(corpus=CategorizedPlaintextCorpusReader('./corpus/', r'.+\.txt', cat_pattern=r'(.+)\.txt')):
+def train_classifier(corpus=CategorizedPlaintextCorpusReader('.\\corpus\\', r'.+\.txt', cat_pattern=r'(.+)\.txt')):
     """Trains a classifier and stores it in file 'nb_classifier'
     
     Parameters:
