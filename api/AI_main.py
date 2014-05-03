@@ -31,7 +31,8 @@ def tokenize_story(story_db_id):
     #import story
     story = story_db.select_content(story_db_id)
     #tokenize story
-    tokenized_story = sent_tokenize(story)
+    unicode_story = story.encode("utf-8")
+    tokenized_story = sent_tokenize(unicode_story)
     
     #1 = Negation, 0 = Normal, insert_keyword(test_keyword, 1, )
     for x in xrange(len(tokenized_story)):
