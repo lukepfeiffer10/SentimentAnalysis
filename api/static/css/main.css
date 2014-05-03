@@ -1,5 +1,6 @@
 ﻿span.sentence {
     margin-right: 5px;
+    cursor:default;
 }
 
     span.sentence.positive {
@@ -12,6 +13,14 @@
 
     span.sentence.negative {
         border-bottom:1px solid #FF7A5E;
+    }
+
+    span.sentence:hover {
+        background-color:rgba(73, 169, 189, .25);
+    }
+
+    span.sentence.clicked {
+        background-color:rgba(73,169,189, .5);
     }
 
 div#darker_background{
