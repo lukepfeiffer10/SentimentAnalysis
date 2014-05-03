@@ -1,5 +1,6 @@
 ﻿span.sentence {
     margin-right: 5px;
+    cursor:default;
 }
 
     span.sentence.positive {
@@ -14,6 +15,17 @@
         border-bottom:1px solid #FF7A5E;
     }
 
+    span.sentence:hover {
+        background-color:rgba(73, 169, 189, .25);
+    }
+
+    span.sentence.clicked {
+        background-color:rgba(73,169,189, .5);
+    }
+
+div#darker_background{
+	background-color: #efeeef;
+}
 
 div#story {
     width: 8.5in;
@@ -44,6 +56,8 @@ div#aboutText {
 
 h1.about {
     width:80px;
-    margin-left:auto;
-    margin-right:auto;
+    /*margin-left:auto;
+    margin-right:auto;*/
+	margin-left: 100px;
+	text-align: left;
 }

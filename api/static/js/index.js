@@ -60,6 +60,8 @@ $(function () {
                 $('#taggingBox').remove();
             }
             $('#story').parent().append(tagView.render().$el);
+            $('span.sentence.clicked').removeClass('clicked');
+            this.$el.addClass('clicked');
         }
     });
 

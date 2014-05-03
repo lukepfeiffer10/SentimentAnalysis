@@ -6,9 +6,13 @@ $(function () {
         var loginObject = {};
         loginObject.username = $('#username').val();
         loginObject.password = $('#password').val();
+        login(loginObject);
+    });
+
+    function login(loginObject) {
         $.ajax({
-            url: '/api/user', 
-            data: JSON.stringify(loginObject), 
+            url: '/api/user',
+            data: JSON.stringify(loginObject),
             success: function () {
                 window.location = '/';
             },
@@ -16,7 +20,7 @@ $(function () {
             type: 'PUT',
             contentType: 'application/json'
         });
-    });
+    }
 
     $('#newUserForm').submit(function (ev) {
         ev.preventDefault();
@@ -29,8 +33,10 @@ $(function () {
             url: '/api/user',
             data: JSON.stringify(newUser),
             success: function (data) {
-                //window.location = '/';
-                alert(data);
+                var loginObject = {}
+                loginObject.username = newUser.username;
+                loginObject.password = newUser.password;
+                login(loginObject);
             },
             dataType: 'json',
             type: 'POST',
