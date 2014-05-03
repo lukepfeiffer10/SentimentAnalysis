@@ -1,11 +1,11 @@
 ﻿html {
-    background-color: #e2e2e2;
+    background-color: #2e4b67;
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #fff;
+	background-color: #2e4b67;
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
@@ -42,6 +42,12 @@ mark {
     padding-right: 5px;
 }
 
+hr {
+	margin-left: 100px;
+	margin-right: 50px;
+	margin-top: 15px;
+}
+
 .float-left {
     float: left;
 }
@@ -61,8 +67,10 @@ mark {
 h1, h2, h3,
 h4, h5, h6 {
     color: #000;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+	padding-top: 25px;
+	font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
 }
 
 h1 {
@@ -99,14 +107,17 @@ h5, h6 {
 }
 
 #body {
-    background-color: #efeeef;
+    /*background-color: #efeeef;*/
+	background-color: white;
+	margin-right: 75px;
+	margin-left: 75px;
     clear: both;
     padding-bottom: 35px;
 }
 
     .main-content {
         background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
+        padding-left: 25px;
         padding-top: 30px;
     }
 
@@ -116,6 +127,7 @@ h5, h6 {
 
 header .content-wrapper {
     padding-top: 20px; 
+	font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
 }
 
 footer {
@@ -129,7 +141,8 @@ footer {
 /* site title
 ----------------------------------------------------------*/
 .site-title {
-    color: #c8c8c8;
+    /*color: #c8c8c8;*/
+	color: white;
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.3em;
     margin: 0;
@@ -153,7 +166,9 @@ footer {
 }
 
     #login a {
-        background-color: #d3dce0;
+        /*background-color: #d3dce0;*/
+		background-color: #fff;
+		color: black;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -184,6 +199,8 @@ ul#menu {
     font-weight: 600;
     margin: 0 0 5px;
     padding: 0;
+	padding-top: 5px;
+	padding-bottom: 10px;
     text-align: right;
 }
 
