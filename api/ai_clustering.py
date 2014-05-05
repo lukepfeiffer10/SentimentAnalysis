@@ -35,15 +35,15 @@ def cluster_story(story_id):
     insert_cluster_data(story_id, cluster_data)
     
 def insert_cluster_data(story_id, cluster_data):
-    cluster_id = gen_cluster_id()
-    print "CLUSTER_ID: ", cluster_id
+    #cluster_id = gen_cluster_id()
+    #print "CLUSTER_ID: ", cluster_id
     for cluster in cluster_data:
         cluster_length = gen_cluster_length(cluster)
-        sql = "INSERT INTO `sa_cluster`(`id`, `sentiment`, `length`, `weight`)"
-        sql += "VALUES (" + str(cluster_id) + ", '" + str(cluster[2]) + "', "
-        sql += str(cluster_length) + ", " + str(cluster[3]) + ");"
-        cur.execute(sql)
-        insert_into_sent_cluster(cluster_id, cluster)
+        cluster_type = "average"
+        sql = "INSERT INTO `sa_cluster`(`sentiment`, `length`, `weight`, `type`) VALUES ('%s', %s, %s, '%s' );"
+        cur.execute(sql % (str(cluster[2]), str(cluster_length), str(cluster[3]), cluster_type))
+        #cluster_id = cur.lastrowid
+        #insert_into_sent_cluster(cluster_id, cluster)
     try:
         db.commit()
     except MySQLdb.Error, e:
@@ -52,16 +52,16 @@ def insert_cluster_data(story_id, cluster_data):
         
 def insert_into_sent_cluster(cluster_id, cluster):
     for sent in cluster[1]:
-        sql = "INSERT INTO `sa_sentence_cluster`(`sentence_id`, `cluster_id`, `type`)"
-        sql += "VALUES (" + str(sent) + ", " + str(cluster_id) + ", '" + "average'" +");"
-        cur.execute(sql)
+        sql = "INSERT INTO `sa_sentence_cluster`(`sentence_id`, `cluster_id) VALUES ( %s, %s );"
+        cur.execute(sql % (str(sent), str(cluster_id)))
+        print "SQL for SENT CLUSTER: ", sql
  
 def gen_cluster_length(cluster_data):
     print "gen_cluster_length"
     words = 0
     for x in xrange(len(cluster_data[1])):
-        sql = "SELECT sentence_txt FROM sentence WHERE id = " + str(cluster_data[1][x])
-        cur.execute(sql)
+        sql = "SELECT sentence_txt FROM sentence WHERE id = %s"
+        cur.execute(sql  % (str(cluster_data[1][x])))
         sent_txt = cur.fetchone()[0]
         sent_len = len(word_tokenize(sent_txt))
         words += sent_len
@@ -120,8 +120,8 @@ def gen_sentence_sentiment(tokenized_story):
     return temp
 
 def retrieve_sent_information(story_id):
-    sql = "select * from sentence where story_id = " + str(story_id)
+    sql = "select * from sentence where story_id = %s"
     sql += " group by seq_num"
-    cur.execute(sql)
+    cur.execute(sql % (str(story_id)))
     temp = [[row[0], row[1], row[2], row[3]] for row in cur.fetchall()]
     return temp
