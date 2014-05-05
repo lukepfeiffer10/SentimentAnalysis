@@ -37,6 +37,10 @@ def renderAboutResearcher():
 def renderStoryUpload():
     return render_template('upload.html')
 
+@app.route('/corpus_download')
+def renderCorpusDownload():
+    return render_template('corpus_download.html')
+
 app.secret_key = '\xd9\xa4\xf9hQ\x82`k9Y\xca7,0\x05gmj\xee\x16\x98Y\x8b\x98'
 
 
