@@ -28,6 +28,10 @@ def renderLogin():
 @app.route('/about')
 def renderAbout():
     return render_template('about.html')
+
+@app.route('/about_researcher')
+def renderAboutResearcher():
+    return render_template('about_researcher.html')
     
 @app.route('/upload')
 def renderStoryUpload():
