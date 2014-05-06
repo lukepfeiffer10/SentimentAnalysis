@@ -52,7 +52,7 @@ def insert_cluster_data(story_id, cluster_data):
         
 def insert_into_sent_cluster(cluster_id, cluster):
     for sent in cluster[1]:
-        sql = "INSERT INTO `sa_sentence_cluster`(`sentence_id`, `cluster_id) VALUES ( %s, %s );"
+        sql = "INSERT INTO `sa_sentence_cluster`(`sentence_id`, `cluster_id`) VALUES ( %s, %s );"
         cur.execute(sql % (str(sent), str(cluster_id)))
         print "SQL for SENT CLUSTER: ", sql
  
