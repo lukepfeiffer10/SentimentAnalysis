@@ -16,6 +16,5 @@ class StoryAPI(Resource):
         title = request.json['title']
         storyID = story.insert(session['u_id'],title, storyText)
         AI.tokenize_story(storyID)
-        story.insert_complete(storyID)
+        story.insert_complete(int(storyID))
         return {'id':storyID}
-        
