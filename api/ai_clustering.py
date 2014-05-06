@@ -42,8 +42,8 @@ def insert_cluster_data(story_id, cluster_data):
         cluster_type = "average"
         sql = "INSERT INTO `sa_cluster`(`sentiment`, `length`, `weight`, `type`) VALUES ('%s', %s, %s, '%s' );"
         cur.execute(sql % (str(cluster[2]), str(cluster_length), str(cluster[3]), cluster_type))
-        #cluster_id = cur.lastrowid
-        #insert_into_sent_cluster(cluster_id, cluster)
+        cluster_id = cur.lastrowid
+        insert_into_sent_cluster(cluster_id, cluster)
     try:
         db.commit()
     except MySQLdb.Error, e:
