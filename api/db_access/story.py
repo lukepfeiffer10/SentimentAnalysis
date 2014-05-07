@@ -13,8 +13,9 @@ def select_all():
     rc, rs = exec_proc("usp_sel_story_all")
     return {'stories': rs} if rc else False
 
-def select_cluster(story_id):
+def select_cluster(user_id):
     # This needs to be changed
+    story_id = select_all_by_author(user_id)['stories'][0]['id']
     rc, rs = exec_proc("usp_sel_cluster", story_id)
     curr_cluster_id = 0
     arr = []
