@@ -61,3 +61,15 @@ h1.about {
 	margin-left: 100px;
 	text-align: left;
 }
+
+div.sentenceCluster {
+    background-color: #2e4b67;
+    overflow: auto;
+    width: 500px;
+}
+
+    div.sentenceCluster > div.sentenceContainer {
+        margin: 10px;
+        background-color: white;
+        padding: 5px;
+    }

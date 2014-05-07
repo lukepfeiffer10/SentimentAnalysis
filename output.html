@@ -1,0 +1,20 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Output</title>
+        <link type="text/css" href="{{ url_for('static', filename= 'css/main.css') }}" rel="stylesheet" />
+        <link type="text/css" href="{{ url_for('static', filename= 'css/Site.css') }}" rel="stylesheet" />
+        <script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename= 'js/underscore.js') }}"></script>
+        <script src="{{ url_for('static', filename= 'js/backbone.js') }}"></script>
+        <script src="{{ url_for('static', filename= 'js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename= 'js/output.js') }}"></script>
+	</head>
+	<body>
+        {% include 'header.html' %}
+        <div id="body">
+            <section id="content" class="content-wrapper main-content clear-fix">
+            </section>
+        </div>
+	</body>
+</html>

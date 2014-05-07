@@ -5,6 +5,7 @@ from flask.ext.restful import Api, Resource, reqparse, fields, marshal
 from sentenceAPI import SentencesAPI, SentencesListAPI
 from userAPI import UserAPI
 from storyAPI import StoryAPI
+from clusterAPI import ClusterAPI
  
 app = Flask(__name__, static_url_path = "/static", template_folder = "../")
 api = Api(app)
@@ -13,6 +14,7 @@ api.add_resource(SentencesListAPI, '/api/sentences', endpoint= 'sentences')
 api.add_resource(SentencesAPI, '/api/sentences/<int:id>', endpoint= 'sentence')
 api.add_resource(UserAPI, '/api/user', endpoint= 'user')
 api.add_resource(StoryAPI, '/api/story', endpoint='story')
+api.add_resource(ClusterAPI, '/api/clusters', endpoint='clusters')
 
 @app.route('/')
 def renderIndex():
@@ -40,6 +42,10 @@ def renderStoryUpload():
 @app.route('/corpus_download')
 def renderCorpusDownload():
     return render_template('corpus_download.html')
+    
+@app.route('/output')
+def renderOutputPage():
+    return render_template('output.html')
 
 app.secret_key = '\xd9\xa4\xf9hQ\x82`k9Y\xca7,0\x05gmj\xee\x16\x98Y\x8b\x98'
 
