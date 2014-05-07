@@ -66,6 +66,7 @@ div.sentenceCluster {
     background-color: #2e4b67;
     overflow: auto;
     width: 500px;
+    display: inline-block;
 }
 
     div.sentenceCluster > div.sentenceContainer {
@@ -73,3 +74,13 @@ div.sentenceCluster {
         background-color: white;
         padding: 5px;
     }
+
+div.clusterDetails {
+    display: inline-block;
+    margin-left: 50px;
+    vertical-align: top;
+}
+
+div.cluster {
+    margin-bottom: 20px;
+}

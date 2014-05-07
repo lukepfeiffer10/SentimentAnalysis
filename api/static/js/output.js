@@ -36,9 +36,16 @@ $(function () {
 
         render: function (collection, response, options) {
             collection.set(response);
-            collection.each(function (cluster) {
-                $('#content').append(new SentenceClusterView({ collection: cluster.sentences }).render().$el);
-            });
+            this.totalWords = collection.models.reduce(function (memo, value, key) {
+                return memo + value.get("length");
+            }, 0);
+            collection.each(function (cluster, index) {
+                var container = $('<div class="cluster">');
+                container.append(new SentenceClusterView({ collection: cluster.sentences }).render().$el);
+                container.append(new ClusterDetailsView({ model: cluster, number: index + 1, totalWordCount: this.totalWords }).render().$el);
+                $('#content').append(container);
+            }, this);
+            
         }
     });
 
@@ -64,19 +71,27 @@ $(function () {
     });
 
     var ClusterDetailsView = Backbone.View.extend({
-        tagName: 'span',
+        tagName: 'div',
+        className: 'clusterDetails',
 
         events: {
         },
 
-        template: _.template("<%= sentence_txt %>"),
+        template: _.template("Cluster <%= number %><br/>" +
+                             "Emotion: <%= sentiment %><br/>" + 
+                             "Weight: <%= weight %><br/>" + 
+                             "Story Percentage: <%= length %> / <%= total %>"),
 
-        initialize: function () {
-
+        initialize: function (options) {
+            this.number = options.number;
+            this.total = options.totalWordCount;
         },
 
         render: function () {
-            this.$el.html(this.template(this.model.attributes));
+            var viewAttributes = this.model.attributes;
+            viewAttributes.number = this.number;
+            viewAttributes.total = this.total;
+            this.$el.html(this.template(viewAttributes));
             return this;
         }
     });
