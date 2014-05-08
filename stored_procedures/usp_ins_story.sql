@@ -16,4 +16,6 @@ user_id,
 story_title,
 story_content);
 
+select LAST_INSERT_ID() as story_id;
+
 END$$

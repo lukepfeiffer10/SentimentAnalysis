@@ -16,4 +16,6 @@ story_id,
 sentence_txt,
 seq_num);
 
+select LAST_INSERT_ID() as sentence_id;
+
 END$$
